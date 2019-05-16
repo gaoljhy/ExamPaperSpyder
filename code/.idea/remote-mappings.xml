@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteMappingsManager">
+    <list>
+      <list>
+        <remote-mappings server-id="python@0e06b48b-f99f-4a85-9d3e-fde4d2752739" />
+        <remote-mappings server-id="python@docker://python:latest/python">
+          <settings>
+            <list>
+              <mapping local-root="$PROJECT_DIR$" remote-root="/work/cet6" />
+            </list>
+          </settings>
+        </remote-mappings>
+        <remote-mappings server-id="python@ssh://root@127.0.0.1:2222/usr/local/bin/python" />
+      </list>
+    </list>
+  </component>
+</project>
