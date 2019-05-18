@@ -10,10 +10,10 @@ jdkInstall(){
 hadoopInstall(){
     apt-get -y install wget
     cd /root/shell/
-#     wget https://mirrors.cnnic.cn/apache/hadoop/common/hadoop-2.8.4/hadoop-2.8.4.tar.gz
-    tar -xf /root/shell/hadoop-2.7.6.tar.gz 
-    rm /root/shell/hadoop-2.7.6.tar.gz
-    mv /root/shell/hadoop-2.7.6/ /usr/local/hadoop
+    wget https://mirrors.cnnic.cn/apache/hadoop/common/hadoop-2.8.4/hadoop-2.8.4.tar.gz
+    tar -xf /root/shell/hadoop-2.8.4.tar.gz
+    rm /root/shell/hadoop-2.8.4.tar.gz
+    mv /root/shell/hadoop-2.8.4/ /usr/local/hadoop
     echo '
 export HADOOP_HOME=/usr/local/hadoop
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
