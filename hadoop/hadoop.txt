@@ -5,7 +5,7 @@
 docker create -it --name hadoop -p 2222:22 -v ~/docker-workdir/:/work:rw adminhub/hadoop-local:latest /bin/bash
 
 ## 自启动 ssh
-docker create -it --name python-ssd -p 2222:22 -v /Users/mr.lemon/docker-workdir/:/work:rw adminhub/python-ssh:latest /usr/sbin/sshd -D
+docker create -it --name hadoop-ssd -p 2222:22 -v ~/docker-workdir/:/work:rw adminhub/hadoop-local:latest /usr/sbin/sshd -D
 
 ## 配置文件集合
 
