@@ -38,3 +38,7 @@ sshLogin(){
     interact
 INP
 }
+
+sshInstall
+sshLogin root localhost ubuntu
+sshRsa

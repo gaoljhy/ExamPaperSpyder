@@ -20,3 +20,4 @@ EOF
     apt-get update
 
 }
+updateApt

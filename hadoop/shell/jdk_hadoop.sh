@@ -3,7 +3,7 @@
 # openjdk8 安装及配置
 jdkInstall(){
     apt-get -y install openjdk-8-jre openjdk-8-jdk
-    echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> ~/.bashrc
+    echo "export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64" >> /root/.bashrc
 } 
 
 # Hadoop安装
@@ -15,10 +15,10 @@ hadoopInstall(){
     rm hadoop-2.8.4.tar.gz
     mv hadoop-2.8.4/ /usr/local/hadoop
 
-    echo '
+    echo "
 export HADOOP_HOME=/usr/local/hadoop
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> ~/.bashrc 
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin" >> /root/.bashrc 
 }
 
 core='
@@ -88,3 +88,7 @@ hadoopConfig(){
     echo $yarn >> $HADOOP_HOME/etc/hadoop/yarn-site-1.xml
     cp $HADOOP_HOME/etc/hadoop/yarn-site-1.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml
 }
+
+jdkInstall
+hadoopInstall
+hadoopConfig
