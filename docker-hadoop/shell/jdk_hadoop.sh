@@ -9,16 +9,16 @@ jdkInstall(){
 # Hadoop安装
 hadoopInstall(){
     apt-get -y install wget
-    cd ~
-    wget https://mirrors.cnnic.cn/apache/hadoop/common/hadoop-2.8.4/hadoop-2.8.4.tar.gz
-    tar -xvf hadoop-2.8.4.tar.gz
-    rm hadoop-2.8.4.tar.gz
-    mv hadoop-2.8.4/ /usr/local/hadoop
-
-    echo "
+    cd /root/shell/
+#     wget https://mirrors.cnnic.cn/apache/hadoop/common/hadoop-2.8.4/hadoop-2.8.4.tar.gz
+    tar -xf /root/shell/hadoop-2.7.6.tar.gz 
+    rm /root/shell/hadoop-2.7.6.tar.gz
+    mv /root/shell/hadoop-2.7.6/ /usr/local/hadoop
+    echo '
 export HADOOP_HOME=/usr/local/hadoop
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin" >> /root/.bashrc 
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin' >> /root/.bashrc 
+
 }
 
 core='
@@ -69,26 +69,28 @@ yarn='
  </configuration>
 '
 
-localp='$HADOOP_HOME/etc/hadoop/'
+localp='/usr/local/hadoop/etc/hadoop/'
 
 hadoopConfig(){
-    tac $HADOOP_HOME/etc/hadoop/core-site.xml | sed '1,2d' | tac > $HADOOP_HOME/etc/hadoop/core-site-1.xml
-    echo $core >> $HADOOP_HOME/etc/hadoop/core-site-1.xml
-    cp $HADOOP_HOME/etc/hadoop/core-site-1.xml $HADOOP_HOME/etc/hadoop/core-site.xml
+    tac $localp/core-site.xml | sed '1,2d' | tac > $localp/core-site-1.xml
+    echo $core >> $localp/core-site-1.xml
+    cp $localp/core-site-1.xml $localp/core-site.xml
     
-    tac $HADOOP_HOME/etc/hadoop/hdfs-site.xml | sed '1,2d' | tac > $HADOOP_HOME/etc/hadoop/hdfs-site-1.xml
-    echo $hdfs >> $HADOOP_HOME/etc/hadoop/hdfs-site-1.xml
-    cp $HADOOP_HOME/etc/hadoop/hdfs-site-1.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+    tac $localp/hdfs-site.xml | sed '1,3d' | tac > $localp/hdfs-site-1.xml
+    echo $hdfs >> $localp/hdfs-site-1.xml
+    cp $localp/hdfs-site-1.xml $localp/hdfs-site.xml
     
-    tac $HADOOP_HOME/etc/hadoop/mapred-site.xml | sed '1,2d' | tac > $HADOOP_HOME/etc/hadoop/mapred-site-1.xml
-    echo $mapred >> $HADOOP_HOME/etc/hadoop/mapred-site-1.xml
-    cp $HADOOP_HOME/etc/hadoop/mapred-site-1.xml $HADOOP_HOME/etc/hadoop/mapred-site.xml
+    tac $localp/mapred-site.xml.template | sed '1,3d' | tac > $localp/mapred-site-1.xml
+    echo $mapred >> $localp/mapred-site-1.xml
+    cp $localp/mapred-site-1.xml $localp/mapred-site.xml
     
-    tac $HADOOP_HOME/etc/hadoop/yarn-site.xml | sed '1,2d' | tac > $HADOOP_HOME/etc/hadoop/yarn-site-1.xml
-    echo $yarn >> $HADOOP_HOME/etc/hadoop/yarn-site-1.xml
-    cp $HADOOP_HOME/etc/hadoop/yarn-site-1.xml $HADOOP_HOME/etc/hadoop/yarn-site.xml
+    tac $localp/yarn-site.xml | sed '1,5d' | tac > $localp/yarn-site-1.xml
+    echo $yarn >> $localp/yarn-site-1.xml
+    cp $localp/yarn-site-1.xml $localp/yarn-site.xml
 }
+
 
 jdkInstall
 hadoopInstall
+source /root/.bashrc
 hadoopConfig
